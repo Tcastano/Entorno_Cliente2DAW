@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    var dias=["lunes","martes","miercoles","jueves","Viernes","Sabado","domingo"];
+
+    console.log("dias: " + dias);
+    console.log("longitud dias: " + dias.length);
+
+    dias=dias.sort();
+
+    console.log("dias: " + dias);
+
+    dias.push("juernes");
+    console.log("dias: " + dias);
+
+    var ultimo=dias.pop();
+    console.log("ultimo: " + ultimo);
+    console.log("dias: " + dias);
+
+    var dia=dias.shift();
+    console.log("dia: " + dia);
+    console.log("dias: " + dias);
+
+    delete dias[3];
+    console.log("dias: " + dias);
+
+    console.log("/////////////////");
+
+    var dias2=[["lunes","martes","miercoles","jueves","Viernes"],["Sabado","domingo"]];
+    console.log(dias2);
+    console.log(dias2[0][2]);
+
+    dias2.forEach(element=>{
+        console.log(element);
+    })
+
+
+    var arrayAleatorios=[];
+    var mayor=0;
+    var menor;
+    var indexmayor;
+    var indexmenor;
+    for (let index = 0; index < 20; index++) {
+        var numero =Math.round(Math.random()*100);
+        menor=numero;
+        arrayAleatorios[index]=numero;
+        
+    }
+
+    for (let index = 0; index < arrayAleatorios.length; index++) {
+        console.log(arrayAleatorios[index]);
+        if (arrayAleatorios[index]>mayor) {
+            mayor=arrayAleatorios[index];
+            indexmayor=index;
+        }
+        if (arrayAleatorios[index]<menor) {
+            menor=arrayAleatorios[index];
+            indexmenor=index;
+        }
+    }
+    console.log("NUmero MAyor: " + mayor);
+    console.log("Numero menor: " + menor);
+    delete arrayAleatorios[indexmayor];
+    delete arrayAleatorios[indexmenor];
+
+    console.log(arrayAleatorios);
+    arrayAleatorios.forEach(Element=>{
+        console.log(Element);
+    })
+
+</script>
+<body>
+    
+</body>
+</html>

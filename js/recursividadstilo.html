@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    class Persona {
+      nombre;
+      apellidoUno;
+      apellidoDos;
+      edad;
+      peso;
+      constructor() {
+        this.nombre = arrayNombres[parseInt(Math.random() * 20)];
+        this.apellidoUno = arrayApellidos[parseInt(Math.random() * 20)];
+        this.apellidoDos = arrayApellidos[parseInt(Math.random() * 20)];
+        this.edad = parseInt(Math.random() * 90);
+        this.peso = parseInt(Math.random() * 90);
+        Object.seal(this);
+      }
+    }
+    let arrayNombres = [
+      "Maria",
+      "Nushi",
+      "Jose",
+      "Muhammad",
+      "Mohamed",
+      "Wei",
+      "Mohammad",
+      "Ahmed",
+      "Yan",
+      "Ali",
+      "John",
+      "David",
+      "Li",
+      "Abdul",
+      "Ana",
+      "Ying",
+      "Michael",
+      "Juan",
+      "Anna",
+      "Miguel",
+    ];
+    let arrayApellidos = [
+      "González",
+      "Rodríguez",
+      "Gómez",
+      "Fernández",
+      "López",
+      "Martínez",
+      "Diaz",
+      "Pérez",
+      "Sánchez",
+      "Romero",
+      "García",
+      "Sosa",
+      "Benítez",
+      "Ramírez",
+      "Torres",
+      "Ruiz",
+      "Flores",
+      "Álvarez",
+      "Acosta",
+      "Rojas",
+    ];
+
+    let arrayPersonas = [];
+    arrayPersonas[0] = new Array();
+    arrayPersonas[1] = new Array();
+
+    //manera Siro: sin return si es 0
+    function crearPersonaRecursividadSiro(numPersonas) {
+      let persona = new Persona();
+
+      if (numPersonas > 0) {
+        arrayPersonas.push(persona);
+        return crearPersonaRecursividadSiro(numPersonas - 1);
+      }
+    }
+
+    //manera Hugo: con return si es 0
+    function crearPersonaRecursividadHugo(numPersonas) {
+      let persona = new Persona();
+
+      if (numPersonas == 0) {
+        return null;
+      } else {
+        arrayPersonas.push(persona);
+        return crearPersonaRecursividadHugo(numPersonas - 1);
+      }
+    }
+
+    //con array bidimensional
+    function crearPersonaRecursividadBidimensional(numPersonas) {
+      let persona = new Persona();
+
+      if (numPersonas == 0) {
+        return null;
+      } else {
+        if (persona.edad < 25) {
+          arrayPersonas[0].push(persona);
+        } else {
+          arrayPersonas[1].push(persona);
+        }
+        return crearPersonaRecursividadBidimensional(numPersonas - 1);
+      }
+    }
+
+    //recorrer array bidimensional y sacar nombre y apellidos
+
+    function imprimirHTML() {
+      let array1 = [];
+      let array2 = [];
+      crearPersonaRecursividadBidimensional(20);
+
+      let showDatosPersona;
+
+      let num = 0;
+
+      arrayPersonas.forEach((element) => {
+        element.forEach((persona) => {
+          num += 1;
+          let nombrePersona = persona.nombre;
+          let apellidoUnoPersona = persona.apellidoUno;
+          let apellidoDosPersona = persona.apellidoDos;
+          let edadPersona = `Edad: ${persona.edad}`;
+          let pesoPersona = `Peso: ${persona.peso}`;
+          showDatosPersona = `${nombrePersona} ${apellidoUnoPersona} ${apellidoDosPersona}`;
+
+          let parrafo = document.createElement("p");
+          parrafo.setAttribute("id", "p" + num);
+          let pTexto = document.createTextNode(showDatosPersona);
+          parrafo.append(pTexto);
+          document.body.append(parrafo);
+
+          let ul = document.createElement("ul");
+          let li = document.createElement("li");
+          let liTexto = document.createTextNode(edadPersona);
+          li.appendChild(liTexto);
+          ul.append(li);
+          document.body.append(ul);
+
+          let li2 = document.createElement("li");
+          liTexto = document.createTextNode(pesoPersona);
+          li2.appendChild(liTexto);
+          ul.append(li2);
+          document.body.append(ul);
+        });
+      });
+      return 0;
+    }
+
+    function imprimirHTML2() {
+      let array1 = [];
+      let array2 = [];
+      crearPersonaRecursividadBidimensional(20);
+
+      let showDatosPersona;
+      let showEdadPersona;
+      let showPesoPersona;
+
+      let parrafo = document.createElement("p");
+      let lista = document.createElement("li");
+
+      let num = 0;
+
+      arrayPersonas.forEach((element) => {
+        element.forEach(function callback(persona, index) {
+          num += 1;
+          console.log(`${persona} y su índice ${index}`);
+          console.log(num);
+          // let nombrePersona = persona.nombre;
+          // let apellidoUnoPersona = persona.apellidoUno;
+          // let apellidoDosPersona = persona.apellidoDos;
+          // showEdadPersona = persona.edad;
+          // let pesoPersona = persona.peso;
+          // showDatosPersona = `${nombrePersona} ${apellidoUnoPersona} ${apellidoDosPersona}`;
+          // parrafo.setAttribute("id", "p" + index);
+          // let pTexto = document.createTextNode(showDatosPersona);
+          // parrafo.append(pTexto);
+          // document.body.append(parrafo);
+        });
+      });
+      return 0;
+      // for (let index = 0; index < 40; index++) {
+      //     arrayPersonas[0][index] = array1[index];
+      // }
+      // for (let j = 0; j < 40; j++) {
+      //     arrayPersonas[1][j] = array2[j];
+      // }
+      // return array1;
+    }
+
+    this.onload = () => {
+      imprimirHTML();
+    };
+  </script>
+  <body></body>
+</html>

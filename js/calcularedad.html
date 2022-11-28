@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function CalcularEdad(){
+        var anoNacimiento=window.prompt("Año de nacimiento");
+        var anoactual=window.prompt("Año de nacimiento");
+        var edad = parseInt(anoactual)-parseInt(anoNacimiento);
+        if (edad==0) {
+            document.getElementById("parrafo").innerHTML="No naciste";
+        } else {
+            document.getElementById("parrafo").innerHTML="Tu edad es " +edad; 
+        }
+        
+    }
+</script>
+<body>
+    <button onclick="CalcularEdad()">
+        Calcular edad
+    </button>
+
+    <p id="parrafo">Tu edad es: </p>
+</body>
+</html>

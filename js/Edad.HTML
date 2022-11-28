@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        
+        var año_nacimiento=0;
+        var año_actual=0;
+        var grados_celsius=0;
+        var grados_farenheit=0;
+
+
+        var Conversiones ={
+
+             numOperaciones : 0,
+             ultimaOp : "",
+             valorUltima: 0,
+
+
+        };
+
+
+        function mostrar(){
+
+            console.log(Conversiones.toString());
+        }
+
+        function calcular (){
+
+            año_nacimiento = window.prompt("Introduzca su año de nacimiento");
+            año_actual = window.prompt("Introduzca año actual");
+
+            var edad_actual= año_actual - año_nacimiento;
+
+
+
+            document.getElementById('muestra').innerHTML="Tu edad es "+parseInt(edad_actual)+"";
+
+
+        }
+
+        function convertir_grados(){
+            console.log("El usuario ha dado click en convertir temperatura");
+            var grados_celsius = window.prompt("Introduzca la temperatura en Celsius");
+            console.log("El usuario ha introducido "+grados_celsius);
+            var grados_farenheit = parseInt (grados_celsius*1.8+32);
+            console.log("La maquina calcula que los Farenheit son"+grados_farenheit);
+            document.getElementById('muestra').innerHTML="La temperatura en Farenhait es "+grados_farenheit;
+            console.log ("Se muestra la temperatura en el HTML");
+            if (grados_celsius<5) {
+                document.getElementById('contenedor_grados').style.backgroundColor="blue";
+                document.getElementById('contenedor_grados').style.color="white";
+                console.log ("Cambio de color de fondo a azul y de letra a blanco");
+            }
+            if (grados_celsius>40) {
+                document.getElementById('contenedor_grados').style.backgroundColor="red";
+                document.getElementById('contenedor_grados').style.color="white";
+                console.log ("Cambio de color de fondo a rojo y de letra a blaco");
+                
+            }
+
+        }
+
+        function convertir_km() {
+            console.log("El usuario ha dado click en el convertidor de km/h");
+             var nudos= window.prompt("Introduzca los nudos");
+            console.log("El usario ha introducido "+nudos);
+             var kms = parseFloat(nudos*1.852).toFixed(2);
+            console.log("La maquina calcula que los Km/h son "+kms);
+            document.getElementById('muestra').innerHTML="La velocidad en Km/h es "+kms;
+            console.log ("Se muestra la velocidad en el HTML")
+            if (kms > 120){
+                document.getElementById('contenedor_km').style.color="red";
+                document.getElementById('contenedor_km').style.fontWeight="bold";
+                document.getElementById('contenedor_km').style.fontSize="24px";
+            }else
+                document.getElementById('contenedor_km').style.color="green";
+                document.getElementById('contenedor_km').style.fontSize="medium";
+                document.getElementById('contenedor_km').style.fontWeight="normal";
+            
+        }
+
+        function convertirEurosADolares() {
+            console.log("El usario ha dado click en el convertidor de dólares");
+            var euros = window.prompt("Introduzca los € a convertir");
+            console.log("El usario ha introducido "+ euros);
+            var dolares = parseFloat(euros*0.99);
+            console.log("La maquina calcula"+dolares+" dolares");
+            document.getElementById('muestra').innerHTML= euros + "euros son "+dolares+ "dólares";
+            console.log ("Se muestra la conversión en el HTML");
+            
+        }
+
+        function AsignarColores(params) {
+            
+        }
+
+        
+
+
+
+    </script>
+</head>
+<body>
+
+    <h2>Calcular edad</h2>
+    <button id="calcular_edad" onclick="calcular()">Calcular edad</button>
+    
+
+    <h2>Convertir a grados</h2>
+    <button id="convertir" onclick="convertir_grados()">Convertir grados</button>
+   
+
+    <h2>Calcular Nudos</h2>
+    <button id="convertir_km" onclick="convertir_km()">Convertir a Km/h</button>
+
+    <h2>Convertir € a $ </h2>
+    <button id="convertir_$" onclick="convertirEurosADolares()">Convertir a $</button>
+
+   <button id="mostrar" onclick="mostrar()">Mostrar propiedades objeto</button>
+
+
+    <br>
+    <br>
+    <br>
+    <div id="contenedor_km" style="border: 1px solid black; max-width: 50vh;">
+        <p id="muestra">Esperando resultados...</p>
+    </div>
+    
+</body>
+</html>

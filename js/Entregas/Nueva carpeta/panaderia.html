@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panaderia de tizziano</title>
+</head>
+<style>
+    *{
+        font-family: monospace;
+        margin: 0;
+        padding: 0;
+        background-color: rgba(255, 234, 206, 0.803);
+    }
+    img{
+        width: 120px;
+        height: 120px;
+    }
+    .header{
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        margin-left: 19%;
+    }
+    #titulo{
+        margin-top: 20px;
+        font-size: 62px;
+    }
+    .idbotones{
+        display: flex;
+        flex-direction: column;
+        margin-left: 30%;
+        margin-right: 30%;
+        margin-top: 8px;
+    }
+    .botones{
+        margin-top: 10px;
+        background-color: rgb(55, 255, 172);
+        padding: 8px;
+    }
+    .botones:hover{
+        background-color: rgba(55, 255, 172, 0.485);
+        transform:scaleX(1.05);
+        border:3px solid black;
+    }
+    #ingrediente{
+        margin-left: 40%;
+        margin-top: 22px;
+    }
+    #divtotal{
+        font-weight: bold;
+        margin-left: 45%;
+        align-content: center;
+        align-content: center;
+    }
+
+</style>
+<script>
+    //Declaracion de constantes
+    const SINCOMPLEMENTO=1;
+    const PIPAS=2;
+    const PASAS=3;
+    const NUECES=4;
+
+    const SINCOMPLEMENTO_TXT="Sin complemento";
+    const PIPAS_TXT="Con pipas";
+    const PASAS_TXT="Con pasas";
+    const NUECES_TXT="Con nueces";
+
+    const PRECIOBASE=1.9;
+    const PRECIOSINCOMPLEMENTOS=0;
+    const PRECIOPIPAS=0.5;
+    const PRECIOPASAS=0.75;
+    const PRECIONUECES=1;
+
+    //Declaracion de objeto pan con sus atributos
+    let pan={
+        nombre:"Pan",
+        complementos:"",
+        iva:0,
+        precio:0
+    };
+
+
+    //funcion onload para cargar es escript despues del html
+    this.onload = () => {
+        //evento onclick en los botones 
+        document.getElementById("sinComplemento").addEventListener("click", () => {
+            //Cambio de imagen y llamada a añadir elemento para despues poder calcular el precio
+            document.getElementById("ingrediente").src="./imagenespanaderia/sincomplemento.png";
+            AñadirElemento(1);
+            precioactual();
+        });
+        document.getElementById("pipas").addEventListener("click", () => {
+            //Cambio de imagen y llamada a añadir elemento para despues poder calcular el precio
+            document.getElementById("ingrediente").src="./imagenespanaderia/pipas.jpg";
+            AñadirElemento(2);
+            precioactual();
+        });
+        document.getElementById("pasas").addEventListener("click", () => {
+            //Cambio de imagen y llamada a añadir elemento para despues poder calcular el precio
+            document.getElementById("ingrediente").src="./imagenespanaderia/pasas.jpg";
+            AñadirElemento(3);
+            precioactual();
+        });
+        document.getElementById("nueces").addEventListener("click", () => {
+            //Cambio de imagen y llamada a añadir elemento para despues poder calcular el precio
+            document.getElementById("ingrediente").src="./imagenespanaderia/nueces.jpg";
+            AñadirElemento(4);
+            precioactual();
+        });
+        document.getElementById("ticket").addEventListener("click", () => {
+            //Cambio de imagen y llamada a añadir elemento para despues poder calcular el precio
+           ImprimirTicket();
+           
+       });
+    }
+
+    //funcion para añadir el elemento a la lista
+    function AñadirElemento(numerocomplemento) {
+        let complementos_txt;
+        let precio;
+        switch (numerocomplemento) {
+            case SINCOMPLEMENTO:
+                //asignacion del complemento y llamada a la funcion de calcular precio e iva
+                pan.complementos=SINCOMPLEMENTO_TXT;
+                console.log("estoy aqui añadir sin complemento");
+                precio=CalcularPrecio(numerocomplemento);
+                break;
+            case PIPAS:
+                 //asignacion del complemento y llamada a la funcion de calcular precio e iva
+                pan.complementos=PIPAS_TXT;
+                precio=CalcularPrecio(numerocomplemento);
+                console.log("estoy aqui añadir pipas");
+                break;
+            case PASAS:
+                 //asignacion del complemento y llamada a la funcion de calcular precio e iva
+                pan.complementos=PASAS_TXT;
+                console.log("añadir pasas");
+                precio=CalcularPrecio(numerocomplemento);
+                break;
+            case NUECES:
+                 //asignacion del complemento y llamada a la funcion de calcular precio e iva
+                pan.complementos=NUECES_TXT;
+                console.log("añadir nueces");
+                precio=CalcularPrecio(numerocomplemento);
+                break;                                       
+            default:
+                break;
+        }
+        //valor de los atributos con un solo decimal
+        pan.iva=pan.iva.toFixed(1);
+        pan.precio=pan.precio.toFixed(1);
+    }
+
+    function CalcularPrecio(numerocomplemento) {
+        switch (numerocomplemento) {
+            case SINCOMPLEMENTO:
+                //calcular precio e iva dependiendo del complemento
+                pan.precio=PRECIOBASE+PRECIOSINCOMPLEMENTOS;
+                pan.iva=pan.precio*0.04;
+                console.log("Clacular precio1");
+                break;
+            case PIPAS:
+                //calcular precio e iva dependiendo del complemento
+                pan.precio=PRECIOBASE+PRECIOPIPAS;
+                pan.iva=pan.precio*0.04;
+                console.log("Clacular precio2");
+                break;
+            case PASAS:
+                //calcular precio e iva dependiendo del complemento
+                pan.precio=PRECIOBASE+PRECIOPASAS;
+                pan.iva=pan.precio*0.04;
+                console.log("Clacular precio3");
+                break;
+            case NUECES:
+                //calcular precio e iva dependiendo del complemento
+                console.log("Clacular precio4");
+                pan.precio = PRECIOBASE+PRECIONUECES;
+                pan.iva=pan.precio*0.04;
+                break;                                       
+            default:
+                break;
+        }
+    }
+    //funcion edita texto del precio sin ticket
+    function precioactual(){
+        document.getElementById("total").innerHTML="Precio: "+pan.precio+"€";
+    }
+    //funcion para crear el ticket
+    function ImprimirTicket(){
+        //creacion del objeto fecha y del texto del ticket
+        let hoy = new Date();
+        dia=hoy.getDate();
+        mes=hoy.getMonth()+1;
+        ano=hoy.getFullYear();
+        horas =hoy.getHours();
+        minutos=hoy.getMinutes();
+        segundos=hoy.getSeconds();
+        texto="ha elegido el pan "+pan.complementos+"\nIVA: "+pan.iva+" \nEl precio es: "+pan.precio;
+        //alert para mostrar toda la informacion del ticket
+        alert(dia+"/"+mes+"/"+ano+" "+horas+":"+minutos+":"+segundos+"\n"+
+            texto);
+    }
+    
+</script>
+<body>
+    <div class="header">
+        <img src="./imagenespanaderia/logo panaderia.png" alt="logo">
+        <h1 id="titulo">Panadería de Tizziano</h1>
+        <img src="./imagenespanaderia/logo panaderia.png" alt="logo">
+    </div>
+    <div class="idbotones">
+    <button class="botones" id="sinComplemento">Sin complemento</button>
+    <button class="botones" id="pipas">pipas</button>
+    <button class="botones" id="pasas">pasas</button>
+    <button class="botones" id="nueces">nueces</button>
+    <div class="divimagen"><img id="ingrediente" alt=""></div>
+    <div id="divtotal">
+        <p id="total">
+            Precio: 0€
+        </p>
+    </div>
+        <button class="botones" id="ticket">Imprimir Ticket</button>
+</div>
+</body>
+</html>

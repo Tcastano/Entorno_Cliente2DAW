@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <p id="pGrados" style="font-weight:bold ;">ºC a F</p>
+    <button onclick="RealizarOperacion(1)">
+        Calcular tempreratura
+    </button>
+
+    <p id="Presultado">Esperando operacion</p>
+
+
+</body>
+<script>
+    const CELSIUS_FARENHEIT=1;
+    const NUDOS_KILOMETROS=2;
+    const EUROS_DOLARES=3;
+    const KILOMETROSHORAS_NUDOS=4;
+    const KILOMETROS_MILLAS=5;
+    const KILOMETROSHORAS_MILLASHORAS=6;
+
+    const CELSIUS_FARENHEIT_TXT="Celcius a Farenheit";
+    const NUDOS_KILOMETROS_TXT="Nudos a Kilomeetros";
+    const EUROS_DOLARES_TXT="Euros a dolares";
+    const KILOMETROSHORAS_NUDOS_TXT="Kilometros horas a nudos hora";
+    const KILOMETROS_MILLAS_TXT="Kilometros a millas ";
+    const KILOMETROSHORAS_MILLASHORAS_TXT="kilometros a millas por hora";
+
+    let resultado;
+
+    
+    function CalcularOperacion(TipoOperacion,valor) {
+        
+        
+        switch (TipoOperacion) {
+            case CELSIUS_FARENHEIT:
+             resultado = (valor * 9 / 5) + 32;;
+                break;
+            case NUDOS_KILOMETROS:
+                
+                break;
+            case EUROS_DOLARES:
+                
+                break;
+            case KILOMETROSHORAS_NUDOS:
+                
+                break;
+            case KILOMETROS_MILLAS:
+
+                break;
+            case KILOMETROSHORAS_MILLASHORAS:
+
+                break;
+        
+            default:
+                break;
+        }
+        EscribirResultado(resultado);
+    }
+
+    function EscribirResultado(resultado) {
+        return resultado;
+    }
+
+    function RealizarOperacion(TipoOperacion) {
+        let valor=window.prompt("Introducir valor");
+        switch (TipoOperacion) {
+            case CELSIUS_FARENHEIT:
+                CalcularOperacion(TipoOperacion,valor);
+               document.getElementById("Presultado").innerHTML=EscribirResultado(resultado);
+                break;
+            case NUDOS_KILOMETROS:
+                
+                break;
+            case EUROS_DOLARES:
+                
+                break;
+            case KILOMETROSHORAS_NUDOS:
+                
+                break;
+            case KILOMETROS_MILLAS:
+
+                break;
+            case KILOMETROSHORAS_MILLASHORAS:
+                break;
+        
+            default:
+                break;
+        }
+        
+    }
+
+    function Invertir(){
+
+    }
+</script>
+</html>

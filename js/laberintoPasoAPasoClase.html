@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laberinto Paso a Paso</title>
+</head>
+<script>
+
+    const NUMERO_OBSTACULOS = 40;
+    const LEFT = 37;
+    const UP = 38;
+    const RIGHT = 39;
+    const DOWN = 40;
+
+
+    // tamaño de la bola
+    const TAM_BOLA_PX = 50;
+    // tamaño de los puntos 
+    const TAM_OBSTACULOS_PX = 10;
+    // tamaño del paso
+    const TAM_PASO_BOLA = 10;
+
+    // Variable que guarda el estado de labola
+    let bola;
+
+    // tiempo de inicio de la partida
+    let t1;
+    //Hora actual
+    let horaActual=new(Date);
+    // Variable que indica si el setInterval está arrancado o no
+    let arrancado = false;
+
+    // id del setinterval
+    let idInterval;
+    let velocidad=50;
+    let tiempo=50;
+    // arrays que guardan las posiciones X e Y de un obstaculo
+    // Ej: para saber la posición del obstaculo 7, cogeremos:
+    // arayX[6] y arraY[6] -> (X, Y)
+    let arrayX = [];
+    let arrayY = [];
+    let arrayObjetos=new Array();
+
+    // Guardamos el alto y ancho del div contenedor
+    let anchoDiv = (window.innerWidth - TAM_BOLA_PX);
+    let altoDiv = (window.innerHeight - TAM_BOLA_PX);
+
+    // Dirección que selecciona el usuario y que indica la dirección
+    // en la que se desplazará la bola
+    let direction;
+
+    class Obstaculo{
+        constructor(posicionX,posicionY){
+            this.posicionX=posicionX;
+            this.posicionY=posicionY;
+            //object.seal(this);
+
+        };
+
+        getPosicionX() {
+            return this.posicionX;
+        }
+
+        setPosicionX(posicionX) {
+            this.posicionX=posicionX;
+        }
+
+        getPosicionY() {
+            return this.posicionY;
+        }
+
+        setPosicionY(posicionY) {
+            this.posicionY=posicionY;
+        }
+
+
+    }
+
+    function RellenarPosicionesAleatoriasObstaculos() {
+        
+        let widthDivContenedor = document.getElementById("contenedorDiv").clientWidth;
+        let heigtDivContenedor = document.getElementById("contenedorDiv").clientHeight;
+
+        for (let index = 0; index < NUMERO_OBSTACULOS; index++) {
+            let posX = NumeroAleatorio(0, widthDivContenedor); 
+            let posY = NumeroAleatorio(0, heigtDivContenedor);
+
+            arrayX.push(parseInt(posX));
+            arrayY.push(posY.toFixed(0));
+        }
+    }
+    // Función que rellena aleatoriamente las posiciones de los obstaculos 
+    // contra los que no podrá chocar la bola
+
+    // función que pinta en pantalla un obstaculo con un id único y en las posiciones
+    // x e y que se le pasan como parámetros
+    function AddPoint() {
+        let array=RellenarObstaculos();
+        for (let index = 0; index < array.length; index++) {
+            
+            let obstaculo = array[index];
+            let posX=obstaculo.getPosicionX();
+            let posY=obstaculo.getPosicionY();
+            console.log(posX);
+            console.log(posY);
+
+            let parrafo = document.createElement("p");
+            
+            parrafo.setAttribute("id", "p" + index);
+    
+            parrafo.style.width = TAM_OBSTACULOS_PX + "px";
+            parrafo.style.height = TAM_OBSTACULOS_PX + "px";
+            parrafo.style.borderRadius = "50%";
+            parrafo.style.backgroundColor = "Yellow";
+            parrafo.style.margin = "0"; 
+    
+            parrafo.style.position = "absolute";
+            parrafo.style.top = posY + "px";
+            parrafo.style.left = posX + "px";
+    
+            document.getElementById("contenedorDiv").appendChild(parrafo);
+            
+        }
+
+    }
+
+    // Función que crea el div contenedor
+    function CrearDivContenedor() {
+        let div = document.createElement("div");
+        div.setAttribute("Id", "contenedorDiv");
+    
+        anchoDiv = (window.innerWidth - 20);
+        altoDiv = (window.innerHeight - 20);
+
+        div.style.width = anchoDiv + "px";
+        div.style.height = altoDiv + "px";
+        div.style.backgroundColor = "black";
+
+        
+        div.style.color="white";
+        div.style.textAlign="right";
+        document.body.appendChild(div);
+    }
+
+    // función que calcula un número aleatorio entre un minimo y un maximo
+    function NumeroAleatorio(minimo, maximo) {
+        return (Math.random() * maximo - minimo) + minimo;
+    }
+
+    // Función que crea una bola en una posición aleatoria del navegador
+    function CrearBola() {
+        let bola = document.createElement("div");
+        bola.setAttribute("Id", "bola");
+
+        bola.style.width = TAM_BOLA_PX + "px";
+        bola.style.height = TAM_BOLA_PX + "px";
+        bola.style.borderRadius = "50%";
+        bola.style.backgroundColor = "#058276";
+        bola.style.position = "absolute";
+
+        let widthDivContenedor = document.getElementById("contenedorDiv").clientWidth;
+        let heigtDivContenedor = document.getElementById("contenedorDiv").clientHeight;
+
+        bola.style.top = NumeroAleatorio(0, heigtDivContenedor) + "px";
+        bola.style.left = NumeroAleatorio(0, widthDivContenedor) + "px";
+
+        document.getElementById("contenedorDiv").appendChild(bola);
+    }
+
+    // Función que va a comprobar que la bola no choque con ninguno de los puntos
+    // creados de manera aleatoria en la pantalla
+    function ComprobarChoque() {
+
+        // recorremos todos los puntos de la pantalla
+        for (let index = 0; index < arrayX.length; index++) {
+            
+            let posicionPuntoX = parseInt(arrayX[index]);
+            let posicionPuntoY = parseInt(arrayY[index]);
+            
+            let posicionBola_X = bola.offsetLeft;
+            let posicionBola_Y = bola.offsetTop;
+
+            if(posicionBola_X > (posicionPuntoX - TAM_BOLA_PX) && 
+               posicionBola_X < (posicionPuntoX + TAM_OBSTACULOS_PX) && 
+                
+                posicionBola_Y > (posicionPuntoY - TAM_BOLA_PX) && 
+                posicionBola_Y < (posicionPuntoY + TAM_OBSTACULOS_PX)) {
+
+                PartidaFinalizada();
+                clearInterval(idInterval);
+            } 
+        }
+    }
+
+    // Función que pinta los obstaculos dentro del div contenedor
+    function RellenarObstaculos() {
+        for (let index = 0; index < NUMERO_OBSTACULOS; index++) {
+            let obstaculo=new Obstaculo(arrayX[index], arrayY[index]);
+            arrayObjetos[index]=obstaculo;
+        }
+        console.log(arrayObjetos);
+        return arrayObjetos;
+        
+    }
+
+    // Función que detecta la pulsación de las flechas del teclado.
+    function LeerTecla(valorLeidoTeclado) {
+        if (valorLeidoTeclado.keyCode == LEFT || 
+            valorLeidoTeclado.keyCode == UP || 
+            valorLeidoTeclado.keyCode == RIGHT || 
+            valorLeidoTeclado.keyCode == DOWN) {
+                direction = valorLeidoTeclado.keyCode;
+
+                Mover();
+                ComprobarChoque();
+
+                // arrancamos el setInterval, solamente la primera vez
+                if (!arrancado) {
+                    idInterval = setInterval(() => {
+                        Mover();
+                        ComprobarChoque();
+                    }, velocidad);
+                    arrancado = true;
+                    t1 = new Date();
+                }
+        }
+    }
+    function movimiento() {
+        if (idInterval) {
+            if (tiempo>10) {
+                tiempo=tiempo-5;
+            }else{
+                tiempo=tiempo/2;
+            }
+        }
+        return tiempo
+    }
+    // Función que muestra un mensaje indicando que la partida ha finalizado
+    // con X segundos de duración
+    function PartidaFinalizada() {
+        removeEventListener();
+        let t2 = new Date();
+        let segundos = ((t2.getTime() - t1.getTime()) / 1000);
+        let parrafo = document.createElement("p");
+        parrafo.innerText = "La partida ha finalizado con " + segundos +
+                        " segundos de duración";
+
+        parrafo.style.fontSize = "25px";
+        parrafo.style.fontWeight = "bold";
+        parrafo.style.color = "#f97e57";
+        parrafo.style.textAlign = "center";
+
+        // añadir dinámicamente un texto en HTML
+        document.getElementById("contenedorDiv").appendChild(parrafo);
+
+    }
+    function removeEventListener() {
+        document.removeEventListener('keydown',LeerTecla);
+    }
+
+    // Función mover que mueve la bola en la dirección indicada por el usuario.
+    // Además, comprueba que no se salga de los límites de la pantalla
+    function Mover() {
+        
+        let posicionX = bola.offsetLeft;
+        let posicionY = bola.offsetTop;
+
+        let anchoBola = TAM_BOLA_PX;
+        let altoBola = TAM_BOLA_PX;
+
+        // Comprobamos si nos salimos por los limites de la pantalla (div)
+        if (posicionX + TAM_BOLA_PX > anchoDiv || posicionX < 0 || 
+            posicionY+ TAM_BOLA_PX > altoDiv || posicionY < 0) {
+
+                // mostramos un mensaje indicando que la partida ha finalizado
+                // con X segundos de duración
+                PartidaFinalizada();
+
+                // paramos el setInterval y ponemos la variable arrancado a false
+                arrancado = false;
+                clearInterval(idInterval);
+        } 
+        // Sino nos movemos en la dirección que dice el usuario
+        else {
+            switch (direction) {
+                case LEFT:
+                    bola.style.left = bola.offsetLeft - TAM_PASO_BOLA + "px";
+                    break;
+                case UP:
+                    bola.style.top = bola.offsetTop - TAM_PASO_BOLA + "px";
+                    break;
+                case RIGHT:
+                    bola.style.left = bola.offsetLeft + TAM_PASO_BOLA + "px";
+                    break;
+                case DOWN:
+                    bola.style.top = bola.offsetTop + TAM_PASO_BOLA + "px";  
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    // evento onload que se ejecutará cuando el DOM esta complemtamente cargado
+    this.onload = () => {
+
+            // Creamos el div contenedor
+            CrearDivContenedor();
+
+            // Crea la bola 
+            CrearBola();
+
+            // Rellenar Posiciones aleatorias
+            RellenarPosicionesAleatoriasObstaculos();
+
+            // Pintamos los obstaculos dentro del div
+            AddPoint();
+
+            // Detección del evento keyPress
+
+            document.addEventListener("keydown", LeerTecla);
+
+            // guardar la bola en una variable
+            bola = document.getElementById("bola");
+    }
+    
+</script>
+<body>
+    
+</body>
+</html>

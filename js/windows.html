@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dimesionespantalla</title>
+</head>
+<script>
+    this.onload=()=>{
+        let ventana;
+        document.getElementById("botontamañoactual").addEventListener("click", () => {
+            let alto=screen.height;
+            let ancho=screen.width;
+            console.log("Dimensiones de la pantalla= " +ancho+"X"+alto);
+        });
+        document.getElementById("ventana").addEventListener("click", () => {
+            ventana = window.open("","","width=100, height=100");
+        });
+        document.getElementById("ventanatamano").addEventListener("click", () => {
+            ventana.resizeTo(500, 500);
+        });
+    }
+</script>
+<body>
+    <button id="botontamañoactual">
+        modificar tamaño
+    </button>
+    <button id="ventana">
+        ABRIR VENTANA EMERGENTE
+    </button>
+    <button id="ventanatamano">
+        editar tamaño ventana
+    </button>
+</body>
+</html>

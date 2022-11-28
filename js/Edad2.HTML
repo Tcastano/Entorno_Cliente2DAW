@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+</head>
+
+<script>
+
+    const CELSIUS_FARENHEIT =1;
+    const FARENHEIT_CELSIUS =2;
+    const NUDOS_KILOMETROS =3;
+    const KILOMETROS_NUDOS =4;
+    const EURO_DOLAR =5;
+    const DOLAR_EURO =6;
+    const KILOMETROS_MILLAS =7;
+    const MILLAS_KILOMETROS =8;
+
+
+    function RealizarOperacion(TipoOperacion, valor) {
+
+        let operacion= TipoOperacion;
+        let txt = Texto;
+
+        if (inverido){
+            switch (TipoOperacion) {
+                case CELSIUS_FARENHEIT:
+                    operacion = FARENHEIT_CELSIUS;
+                    txt =FARENHEIT_CELSIUS_TXT;
+                    // continuar con esto
+                    break;
+            
+                default:
+                    break;
+            }
+        }
+
+
+        switch (TipoOperacion) {
+            case CELSIUS_FARENHEIT:
+                CalcularOperacion(TipoOperacion, valor)
+                break;
+                
+            case FARENHEIT_CELSIUS:
+                CalcularOperacion(TipoOperacion, valor)
+                break;
+            
+            case NUDOS_KILOMETROS:
+                CalcularOperacion(TipoOperacion,valor)
+                break;
+            
+            case KILOMETROS_NUDOS:
+                CalcularOperacion(TipoOperacion,valor)
+                break;
+            
+            case EURO_DOLAR:
+                CalcularOperacion(TipoOperacion,valor)
+                break;
+
+            case DOLAR_EURO:
+                CalcularOperacion(TipoOperacion,valor)
+                break;
+
+            case KILOMETROS_MILLAS:
+                CalcularOperacion(TipoOperacion,valor)
+                break;
+
+            case MILLAS_KILOMETROS:
+                CalcularOperacion(TipoOperacion,valor)
+                break;
+
+            default:
+                break;
+        }
+
+
+        
+    }
+
+
+    function CalcularOperacion(TipoOperacion, valor) {
+        let valor=window.prompt("Introducir valor");
+        switch (TipoOperacion) {
+            case CELSIUS_FARENHEIT:
+
+            let grados_farenheit = parseInt (valor*1.8+32);
+            return grados_farenheit;
+                
+            break;
+
+            case FARENHEIT_CELSIUS:
+            let gradosCelsius = parseInt((valor - 32) * 5/9); 
+            break;
+
+         
+
+            case NUDOS_KILOMETROS:
+            let  kms= parseFloat(valor*1.852).toFixed(2);
+            return kms;
+            break;
+
+            case KILOMETROS_NUDOS:
+            
+             let nudos = parseInt(valor / 1.85);
+             return nudos;
+             break;
+
+
+            case EURO_DOLAR:
+            let dolar = parseFloat(valor * 0.99);
+            return dolar;
+            break;
+
+            case DOLAR_EURO:
+            let euro = parseFloat (valor * 1.01);
+            return euro;
+            break;
+
+            case MILLAS_KILOMETROS:
+            
+            let km=parseInt(valor/0.621371);
+            return millas;
+            break;
+
+            case KILOMETROS_MILLAS:
+            let  millas=parseInt(valor*0.621371);
+            break;
+          
+        }
+        
+    }
+
+</script>
+
+<body>
+    <h1>Conversiones</h1>
+
+    <h2>Invertir</h2>
+    
+    <button type="button" onclick="invertirBoton(valor_boton)" id="boton_invertir">Invertir Conversiones</button>
+
+
+    <h2 id="edad_id">Calcular Edad</h2>
+    <button type="button" onclick="calcularEdad()">Calcular Edad</button>
+    <p id="parrafo">Tu edad es: </p>
+
+    <h2 id="celsius_id">Convertir Celsius a Fahrenheit</h2>
+    <button type="button" onclick="calcularTemperatura(valor_boton)">Convertir</button>
+    <div id = "contenedor_color">
+        <p >Grados Fahrenheit: </p>
+    </div>
+
+    <h2 id="nudos_id">Convertir Nudos a Km/h</h2>
+    <button type="button" onclick="calcularNudosKmh(valor_boton)">Convertir</button>
+    <div id="container_nudos">
+        <p>Kilometros: </p>
+    </div>
+
+
+    <h2 id="euros_id">Convertir Euros a Dolares</h2>
+    <button type="button" onclick="calcularDivisa(valor_boton)">Convertir</button>
+    <div id="container_divisa">
+    <p>Dolares: </p>
+    </div>
+
+    <h2 id="kilometros_id">Convertir Km a Millas</h2>
+    <button type="button" onclick="calcularMillas(valor_boton)">Convertir</button>
+    <div id="container_millas">
+        <p>Millas: </p>
+    </div>
+
+
+    <h2 id="kilometrosHora_id">Convertir Velocidad en Km/h a Millas/segundo</h2>
+    <button type="button" onclick="calcularMillasS(valor_boton)">Convertir</button>
+    <div id="container_millas_segundo">
+        <p>Milla/segundo: </p>
+    </div>
+</body>
+    
+</body>
+</html>

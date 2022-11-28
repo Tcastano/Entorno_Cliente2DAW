@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    var cadena1 = "hola";
+    var cadena2 = new String("hola");
+
+    if (cadena1 == cadena2) {
+        console.log("cadena == cadena2");
+    } else {
+        console.log("cadena != cadena2")
+    }
+
+    if (cadena1 === cadena2) {
+        console.log("cadena == cadena2");
+    } else {
+        console.log("cadena != cadena2")
+    }
+
+    var perro = new Object();
+    perro.raza = "Podenco";
+    perro.peso = "12";
+    perro.altura = "50";
+    perro.color = "negro";
+    perro.vacunado = true;
+
+    var perro2 = {
+        raza: "Podenco",
+        peso: "12",
+        altura: "50",
+        color: "negro",
+        vacunado: true,
+    }
+
+    console.log("perro: " + perro);
+    console.log("perro raza: " + perro.raza);
+    console.log("perro raza: " + perro2["raza"]);
+    console.log("perro: " + JSON.stringify(perro));
+
+
+
+    var paciente = {
+        nombre: "Pelayo",
+        apellidos: "Vega",
+        edad: "38",
+        peso: "61",
+        vacunaCovid: "Si"
+
+    }
+    alert("El paciente " + paciente.nombre + " " + paciente.apellidos + " de " + paciente.edad + " y pesa " + paciente.peso + " " + paciente.vacunaCovid + " ha sido vacunado del COVID");
+
+    for (const campo  in paciente) {
+        //alert(campo);
+        //alert(persona[campo]);
+    }
+
+    function coche(modelo,color,kilometros) {
+        this.modelo = modelo;
+        this.color = color;
+        this.kilometros = kilometros;
+
+    }
+
+    var miCoche = new coche("Renaul Megane","Blanco","56000");
+    var tuCoche = new coche("Renaul Clio","Blanco","56000");
+    console.log(miCoche);
+    console.log(tuCoche);
+
+    let miscoches=miCoche;
+
+    console.log(JSON.stringify(miscoches));
+
+
+    class Persona{
+        constructor(){
+            this.nombre="hugo";
+            this.apellidos="Sanchez Garcia";
+
+            Object.seal(this);
+            Object.freeze(this);
+
+        }
+    }
+    
+    let persona=new Persona();
+    console.log(persona);
+
+    let arrayPersonas = new Array();
+
+    for (let index = 0; index < 1; index++) {
+        let persona = new Persona();
+        let persona2 = new Persona();
+        let persona3 = new Persona();
+        let persona4 = new Persona();
+        let persona5 = new Persona();
+        let persona6 = new Persona();
+        persona2.nombre="siro";
+        persona.peso=5;
+        arrayPersonas.push(persona);
+        arrayPersonas.push(persona2);
+        arrayPersonas.push(persona3);
+        arrayPersonas.push(persona4);
+        arrayPersonas.push(persona5);
+        arrayPersonas.push(persona6);
+
+
+    }
+
+    console.log(arrayPersonas);
+</script>
+
+<body>
+
+</body>
+
+</html>

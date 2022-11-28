@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // function cambiar() {
+    //     var imagen = document.getElementById('imagen');
+
+    //     if (imagen.src.match('rojo')) {
+    //         imagen.src = "./imagenes/circuloverde.png"
+    //         document.getElementById('tituloimagen').style.color="green";document.getElementById('tituloimagen').style.fontSize="54px";
+    //     } else {
+    //         imagen.src = "./imagenes/circulorojo.jpg"
+    //         document.getElementById('tituloimagen').style.color="red";document.getElementById('tituloimagen').style.fontSize="34px";
+    //     }
+    
+    // }
+
+    function Bienvenida(){
+        var nombre=window.prompt("Dime tu nombre","Desconocido");
+        document.getElementById("parrafo").innerHTML="Bienvenido a JS  "+nombre;
+
+    }
+</script>
+
+<body>
+    <Button onclick="Bienvenida()">Bienvenida</Button>
+    <p id="parrafo">Esperando nombre del Alumno</p>
+
+    <!-- <h1 id="h1">Hola mundo</h1>
+    <button id="1" onclick="document.getElementById('h1').innerHTML = 'Adios mundo';
+            document.getElementById('1').remove()">pulsar </button>
+
+
+
+
+    <h2 id="tituloimagen">Cambiar de color la imagen</h2>
+    <img id="imagen" onmouseover="cambiar()" onmouseleave=" cambiar()" src="./imagenes/circulorojo.jpg" alt="circulo"> -->
+</body>
+
+</html>

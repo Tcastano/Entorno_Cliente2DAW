@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculadora</title>
+</head>
+<script>
+    let resultado;
+    this.onload=()=>{
+        let numero=window.prompt("Introducir Numero");
+        document.getElementById("RaizCuadrada").addEventListener("click", () => {
+            resultado=Math. sqrt(numero);
+           console.log("El cuadrado del "+numero+" es: "+resultado);
+        });
+        document.getElementById("PI").addEventListener("click", () => {
+            resultado=Math.PI;
+            console.log("El numero PI es: "+resultado);
+        });
+        document.getElementById("RaizCuadrada").addEventListener("click", () => {
+            resultado=numero*numero;
+        });
+        document.getElementById("RaizCuadrada").addEventListener("click", () => {
+            resultado=numero*numero;
+        });
+    }
+</script>
+<body>
+   <button id="raizCuadrada"></button>
+   <button id="valorPI"></button>
+   <button id="numeroAleatorio10"></button>
+   <button id="numeroAleatorio100"></button>
+   <button id="numeroAleatorio2/50"></button>
+</body>
+</html>

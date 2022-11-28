@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    var invertir = false;
+    var contoperaciones=0;
+    var conversiones={
+        numeroOperaciones:contoperaciones,
+        ultimaOperacion:"operacion",
+        valorUltimaOperacion:"0"
+    }
+    function InvertirConversiones() {
+        if (invertir == false) {
+            document.getElementById("pGrados").innerHTML="Convertir F a ºC";
+            document.getElementById("pDistancia").innerHTML="Convertir km/h a Nudos";
+            document.getElementById("pEuros").innerHTML="Convertir Dolares a Euros";
+            document.getElementById("pMillas").innerHTML="Convertir Millas a Kilometros";
+            document.getElementById("pMillasHoras").innerHTML="Convertir Millas/horas a Km/horas";
+            invertir == true;
+        } else {
+            document.getElementById("pGrados").innerHTML="Convertir ºC a F";
+            document.getElementById("pDistancia").innerHTML="Convertir km/h a Nudos";
+            document.getElementById("pEuros").innerHTML="Convertir Dolares a Euros";
+            document.getElementById("pMillas").innerHTML="Convertir Millas a Kilometros";
+            document.getElementById("pMillasHoras").innerHTML="Convertir Millas/horas a Km/horas";
+            invertir == false;
+        }
+    }
+    function Temperatura() {
+        
+        if (convertir == true) {
+            console.log("El usuario hizo click en el boton de cambio de temperatura")
+            var temperaturaactual = window.prompt("Temperatura");
+            console.log("El usuario mete la tempreatura: " + temperaturaactual);
+            var Temperatura = (temperaturaactual * 9 / 5) + 32;
+            document.getElementById("parrafoResultados").innerHTML = Temperatura + " F";
+            if (temperaturaactual >= 40) {
+                document.getElementById("resultados").style.backgroundColor = "Red";
+                document.getElementById("resultados").style.color = "white";
+            } if (temperaturaactual <= 5) {
+                document.getElementById("resultados").style.backgroundColor = "blue"
+                document.getElementById("resultados").style.color = "white";
+            }
+        }else{
+            console.log("El usuario hizo click en el boton de cambio de temperatura")
+            var temperaturaactual = window.prompt("Temperatura");
+            console.log("El usuario mete la tempreatura: " + temperaturaactual);
+            var Temperatura = (temperaturaactual / 9 * 5) - 32;
+            document.getElementById("parrafoResultados").innerHTML = Temperatura + " F";
+            if (temperaturaactual >= 40) {
+                document.getElementById("resultados").style.backgroundColor = "Red";
+                document.getElementById("resultados").style.color = "white";
+            } if (temperaturaactual <= 5) {
+                document.getElementById("resultados").style.backgroundColor = "blue"
+                document.getElementById("resultados").style.color = "white";
+            }
+        }
+        conversiones.ultimaOperacion="Calcular temperatura"
+        conversiones.valorUltimaOperacion=Temperatura;
+        conversiones.numeroOperaciones=contoperaciones++;
+        document.getElementById("Parrafocontar").innerHTML=conversiones.ultimaOperacion;
+        document.getElementById("Contadoroperaciones").innerHTML=conversiones.numeroOperaciones;
+
+    }
+    function Distancia() {
+        console.log("El usuario hizo click en el boton de cambio de distancia")
+        var nudos = window.prompt("nudos");
+        console.log("El usuario mete los nudos: " + nudos);
+        var kilometros = (nudos * 1.86);
+        document.getElementById("parrafoResultados").innerHTML = kilometros + " KM/h";
+        if (nudos >= 120) {
+            document.getElementById("resultados").style.fontWeight = "bold";
+            document.getElementById("resultados").style.fontSize = "48px";
+            document.getElementById("resultados").style.color = "red";
+
+        } else {
+            document.getElementById("resultados").style.color = "green";
+            document.getElementById("resultados").style.fontWeight = "normal";
+            document.getElementById("resultados").style.fontSize = "16px";
+        }
+        conversiones.ultimaOperacion="Calcular Distancia en nudos"
+        conversiones.valorUltimaOperacion=kilometros;
+        conversiones.numeroOperaciones=contoperaciones++;
+        document.getElementById("Parrafocontar").innerHTML=conversiones.ultimaOperacion;
+        document.getElementById("Contadoroperaciones").innerHTML=conversiones.numeroOperaciones;
+    }
+    function Euros() {
+        console.log("El usuario hizo click en el boton de cambio de distancia")
+        var euros = window.prompt("euros");
+        console.log("El usuario mete los euros: " + euros);
+        var dolares = (euros * 99 / 100);
+        document.getElementById("parrafoResultados").innerHTML = dolares + " $";
+        if (euros >= 120) {
+            document.getElementById("resultados").style.fontWeight = "bold";
+            document.getElementById("resultados").style.fontSize = "48px";
+            document.getElementById("resultados").style.color = "red";
+
+        } else {
+            document.getElementById("resultados").style.color = "green";
+            document.getElementById("resultados").style.fontWeight = "normal";
+            document.getElementById("resultados").style.fontSize = "16px";
+        }
+        conversiones.ultimaOperacion="Calcular Dinero"
+        conversiones.valorUltimaOperacion=dolares;
+        conversiones.numeroOperaciones=contoperaciones++;
+        document.getElementById("Parrafocontar").innerHTML=conversiones.ultimaOperacion;
+        document.getElementById("Contadoroperaciones").innerHTML=conversiones.numeroOperaciones;
+    }
+    function Millas() {
+        console.log("El usuario hizo click en el boton de cambio de distancia")
+        var Millas = window.prompt("Millas");
+        console.log("El usuario mete los Millas: " + Millas);
+        var kilometros = (Millas * 1.60);
+        document.getElementById("parrafoResultados").innerHTML = kilometros + " $";
+        if (Millas >= 120) {
+            document.getElementById("resultados").style.fontWeight = "bold";
+            document.getElementById("resultados").style.fontSize = "48px";
+            document.getElementById("resultados").style.color = "red";
+
+        } else {
+            document.getElementById("resultados").style.color = "green";
+            document.getElementById("resultados").style.fontWeight = "normal";
+            document.getElementById("resultados").style.fontSize = "16px";
+        }
+
+        conversiones.ultimaOperacion="Calcular Distancia"
+        conversiones.valorUltimaOperacion=kilometros;
+        conversiones.numeroOperaciones=contoperaciones++;
+        document.getElementById("Parrafocontar").innerHTML=conversiones.ultimaOperacion;
+        document.getElementById("Contadoroperaciones").innerHTML=conversiones.numeroOperaciones;
+    }
+    function MillasHoras() {
+        console.log("El usuario hizo click en el boton de cambio de distancia")
+        var MillasHoras = window.prompt("MillasHoras");
+        console.log("El usuario mete los MillasHoras: " + MillasHoras);
+        var KilometrosSegundos = (MillasHoras * 1.60);
+        document.getElementById("parrafoResultados").innerHTML = KilometrosSegundos + " $";
+        if (MillasHoras >= 120) {
+            document.getElementById("resultados").style.fontWeight = "bold";
+            document.getElementById("resultados").style.fontSize = "48px";
+            document.getElementById("resultados").style.color = "red";
+
+        } else {
+            document.getElementById("resultados").style.color = "green";
+            document.getElementById("resultados").style.fontWeight = "normal";
+            document.getElementById("resultados").style.fontSize = "16px";
+        }
+        conversiones.ultimaOperacion="Calcular kilometros segundos"
+        conversiones.valorUltimaOperacion=KilometrosSegundos;
+        conversiones.numeroOperaciones=contoperaciones++;
+        document.getElementById("Parrafocontar").innerHTML=conversiones.ultimaOperacion;
+        document.getElementById("Contadoroperaciones").innerHTML=conversiones.numeroOperaciones;
+    }
+
+    function Limpiar(conversiones) {
+        conversiones.numeroOperaciones==0;
+        document.getElementById("Parrafocontar").innerHTML="Esperando Operacion"
+        document.getElementById("parrafoResultados").innerHTML="Esperando Operacion"
+    }
+    function toString(conversiones) {
+       document.getElementById("objeto").innerHTML=JSON.stringify(conversiones);
+
+    }
+</script>
+
+<body>
+    <button onclick="InvertirConversiones()">
+        Invertir Conversiones
+    </button>
+    <p id="pGrados" style="font-weight:bold ;">ºC a F</p>
+    <button onclick="Temperatura()">
+        Calcular tempreratura
+    </button>
+    <p id="pDistancia" style="font-weight:bold ;">Nudos a KIlometros/horas</p>
+    <button onclick="Distancia()">
+        Calcular Distancia
+    </button>
+    <p id="pEuros" style="font-weight:bold ;">Euros a dolares</p>
+    <button onclick="Euros()">
+        Calcular Distancia
+    </button>
+    <p id="pMillas" style="font-weight:bold ;">Millas a euros</p>
+    <button onclick="Millas()">
+        Calcular Distancia
+    </button>
+    <p id="pMillasHoras" style="font-weight:bold ;">Millas/hora a kilometros/segundo</p>
+    <button onclick="MillasHoras()">
+        Calcular Distancia
+    </button>
+    <div id="contar" style="max-width:50px">
+        <p id="Parrafocontar">Contador</p>
+        <p id="Contador">Esperando resultado</p>
+    </div>
+    <button onclick="Limpiar()">
+        Limpiar contador
+    </button>
+    <div id="resultados" style="max-width:50px">
+        <p id="parrafoResultados">Esperando resultado</p>
+    </div>
+</body>
+
+</html>

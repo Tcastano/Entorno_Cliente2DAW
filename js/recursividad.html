@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    let arraynombre = [
+      "Samuel",
+      "Aroa",
+      "Clarisa",
+      "Anacleto",
+      "Apolinar",
+      "Brunilda",
+      "Leoncio",
+      "Espiridión",
+      "Mamen",
+      "Patricia",
+      "Eutimio",
+      "Vidal Victoriano",
+      "Santiago",
+      "Nilo",
+      "Ezequiel",
+      "Alonso",
+      "Viviana",
+      "Luciano",
+      "Hernán",
+      "Dolores Manuelita",
+    ];
+    let arrayapellidos = [
+      "Carreras",
+      "Nuñez",
+      "Manzano",
+      "Lledó",
+      "Comas",
+      "Falcó",
+      "Linares",
+      "Llorens",
+      "Mena",
+      "Cabrera",
+      "Estévez",
+      "Olivares",
+      "Sanz",
+      "Castañeda",
+      "de",
+      "Crespo",
+      "Amat",
+      "Gonzalo",
+      "Roldán",
+      "Seguí",
+      "Macías",
+      "Casal",
+      "Rosales",
+      "Querol",
+      "Bernat",
+      "Perez",
+      "Alberdi",
+      "Azcona",
+      "Morata",
+      "Barón",
+      "Ortuño",
+      "Vall" - "Suárez",
+      "Fuente",
+      "Báez",
+      "Rosales",
+      "Menéndez",
+      "Manuelita",
+      "Valcárcel",
+      "Arcos",
+    ];
+    class Persona {
+      constructor() {
+        this.nombre = NombreAleatorio();
+        this.apellidos = Apellidoaleatorio();
+        this.peso = PesoAleatorio();
+        this.edad = EdadAleatorio();
+
+        Object.seal(this);
+      }
+
+      getnombre() {
+        return this.nombre;
+      }
+
+      setnombre(nombre) {
+        this.nombre = nombre;
+      }
+
+      getapellidos() {
+        return this.apellidos;
+      }
+
+      setapellidos(apellidos) {
+        this.apellidos = apellidos;
+      }
+      getpeso() {
+        return this.peso;
+      }
+
+      setpeso(peso) {
+        this.peso = peso;
+      }
+
+      getedad() {
+        return this.edad;
+      }
+
+      setedad(edad) {
+        this.edad = edad;
+      }
+    }
+    
+    function Apellidoaleatorio() {
+        let apellido1=arrayapellidos[Math.round(Math.random()*37)];
+        let apellido2=arrayapellidos[Math.round(Math.random()*37)];
+        let apellido=apellido1+" "+apellido2;
+        return apellido;
+        
+    }
+
+    function NombreAleatorio() {
+        let nombre=arraynombre[Math.round(Math.random()*19)];
+        return nombre;
+        
+    }
+
+    function EdadAleatorio() {
+        let edad=Math.round(Math.random()*80);
+        return edad;
+        
+    }
+    function PesoAleatorio() {
+        let peso=Math.round(Math.random()*120);
+        return peso;
+    }
+    let arrayPersonas=[];
+    function CrearPersona(cont) {
+
+        let persona=new Persona();
+
+        if (cont==0) {
+
+          return null;
+        }else{
+          if (persona.edad<25) {
+            arrayPersonas[0].push(persona);
+          } else {
+            arrayPersonas[1].push(persona);
+            
+          }
+          return CrearPersona(cont-1);
+        }
+    }
+
+    function Crearestilo() {
+      CrearDivContenedor();
+      let cuadro=document.getElementById("contenedorDiv")
+      let array1=[];
+      let array2=[];
+      CrearPersona(20);
+      let personaInfo;
+      let cont=0;
+      arrayPersonas.forEach((element) => {
+        element.forEach((persona) => {
+          cont =1;
+          let nombre=persona.nombre;
+          let apellidoPersona=persona.apellidos;
+          let edad="Edad:" +persona.edad;
+          let peso="Peso: "+persona.peso;
+          personaInfo=nombre +" "+apellidoPersona;
+
+          let parrafo=document.createElement("p");
+          parrafo.setAttribute("id", "p" + cont);
+          let pTexto=document.createTextNode(personaInfo);
+          parrafo.append(pTexto);
+          cuadro.append(parrafo);
+
+          let ul=document.createElement("ul");
+          let li=document.createElement("li");
+          let liTexto=document.createTextNode(edad);
+          li.appendChild(liTexto);
+          ul.append(li);  
+          cuadro.append(ul);
+
+          let li2=document.createElement("li");
+          liTexto=document.createTextNode(peso);
+          li2.appendChild(liTexto);
+          ul.append(li2);
+          cuadro.append(ul);
+        });
+      });
+      return 0;
+    }
+
+    function CrearDivContenedor() {
+        let div = document.createElement("div");
+        div.setAttribute("Id", "contenedorDiv");
+    
+        anchoDiv = (window.innerWidth - 20);
+        altoDiv = (window.innerHeight - 20);
+
+        div.style.backgroundColor = "#fabada";
+
+        div.style.gridTemplateColumns="repeat(4,1fr)"
+        div.style.paddingLeft="44px";
+        div.style.color="black";
+        div.style.textAlign="left";
+        div.style.display="grid";
+        div.style.grid="repeat(3, 1fr)";
+        document.body.appendChild(div);
+    }
+
+    this.onload=() => {
+      arrayPersonas[0]=new Array();
+      arrayPersonas[1]=new Array();
+      CrearPersona(20);
+      console.log(arrayPersonas); 
+
+      Crearestilo();
+    };
+  </script>
+  <body></body>
+</html>

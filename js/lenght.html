@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script type="text/javascript">
+    document.write("<br>Altura total: " +screen.height);
+    document.write("<br>Altura total: " +screen.availHeight);
+    document.write("<br>Altura total: " +screen.width);
+    document.write("<br>Altura total: " +screen.availWidth);
+    document.write("<br>Altura total: " +screen.colorDepth);
+    let ancho;
+    let alto;
+    
+    this.onload=()=>{
+        ancho=screen.width;
+        alto=screen.height;
+
+        let diagonal=Math.sqrt(ancho*ancho+alto*alto);
+        console.log("diagonal:"+diagonal);
+        // console.log(navigator.appCodeName);
+        // console.log(navigator.appName);
+        // console.log(navigator.appVersion);
+        // console.log(navigator.cookieEnabled);
+        // console.log(navigator.platform);
+        // console.log(navigator.userAgent);
+        
+
+    }
+</script>
+<body>
+    
+</body>
+</html>

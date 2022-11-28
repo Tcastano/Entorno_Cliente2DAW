@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laberinto</title>
+</head>
+<script>
+
+    const LEFT=37;
+    const RIGHT=39;
+    const UP=38;
+    const DOWN=40;
+    let intervalo;
+    //variable para ver el estado set interval
+    let arrancado=false;
+    //bola del jugador
+    let bola;
+    //numero de obstaculos
+    let numeroObstaculos;
+    //array guardan posicion
+    //posicion del estaculo X estara en la posicion X del array guradada
+    let arrayX=[];
+    let arrayY=[];
+    
+    //Direccion en la que se quiere mover el usuario
+    let direccion;
+    let movimiento;
+    //hora de inicio de partida
+    let tiempo1;
+
+    this.onload=()=>{
+        //Creamos el div contenedor
+        CrearDiv();
+        //Creamos el circulo 
+        CrearCirculo();
+        //Preguntar cuantos obtaculos quiere el jugador
+        NumeroObstaculos();
+        //posiciones de los obstaculos
+        RellenarArrayPosiciones();
+        //Posicionar obstaculos
+        RellenarObstaculos();
+        //Leer tecla pulsada para moverse
+        document.addEventListener("keydown",LeerTecla);
+        //mover circulo
+        bola=document.getElementById("circulo");
+        fondo=document.getElementById("divfondo");
+        
+    }
+    //Funcion que pregunta cuantos obstaculos quiere el jugador
+    function NumeroObstaculos() {
+        numeroObstaculos=window.prompt("Numero de obstacculos deseados")
+    }
+
+    //Funcion que Coloca los obstaculos
+    function RellenarObstaculos() {
+        for (let index = 0; index < numeroObstaculos; index++) {
+            let x=arrayX[index];
+            let y=arrayY[index];
+            AddPoint(index,x,y);
+        }
+    }
+
+    //Funcion que crea el div del Fondo
+    function CrearDiv() {
+        let alto = (window.innerWidth-22)+"px";
+        let ancho = (window.innerHeight-22)+"px";
+        let divfondo = document.createElement("div");
+
+        //creacion del divfondo
+        document.body.appendChild(divfondo);
+        divfondo.setAttribute("Id","divfondo");
+
+        //colorines
+        document.getElementById('divfondo').style.width=alto;
+        document.getElementById('divfondo').style.height=ancho;
+        document.getElementById('divfondo').style.backgroundColor="grey";
+    }
+
+    //funcion crear bola
+    function CrearCirculo() {
+        let alto = 30 + "px";
+        let ancho = 30 + "px";
+        let posicionY=Math.random()*(window.innerWidth-32)+"px";
+        let posicionX=Math.random()*(window.innerHeight-32)+"px";
+        let circulo = document.createElement("div");
+
+        //crear circulo
+        document.getElementById("divfondo").appendChild(circulo);
+        circulo.setAttribute("Id","circulo");
+
+        //colorines
+        circulo.style.width=alto;
+        circulo.style.height=ancho;
+        circulo.style.backgroundColor="red";
+        circulo.style.borderRadius="50%";
+
+        //posicion
+        circulo.style.position="absolute";
+        circulo.style.top=posicionX;
+        circulo.style.left=posicionY;
+
+    }
+
+    //Funcion que rellena array con las posiciones de los obstaculos
+    function RellenarArrayPosiciones() {
+
+        
+        for (let i = 0; i <numeroObstaculos; i++) {
+            let posicionY=(Math.random()*(window.innerWidth-DOWN)).toFixed(0)+"px";
+            let posicionX=(Math.random()*(window.innerHeight-DOWN)).toFixed(0)+"px";
+            arrayX.push(posicionX);
+            arrayY.push(posicionY);
+        }
+        
+    }
+
+    //Funcion que Añade los obstaculos con las posiciones del array
+    function AddPoint(index,x,y) {
+        //Creacion del los elementos
+        let obstaculo=document.createElement("p");
+        let id="p"+index;
+        document.getElementById("divfondo").appendChild(obstaculo);
+        obstaculo.setAttribute("id",id);
+
+        //atributos
+        obstaculo.style.width="10px";
+        obstaculo.style.height="10px";
+        obstaculo.style.backgroundColor="Yellow";
+        obstaculo.style.borderRadius="50%";
+        //posicion
+        obstaculo.style.position="absolute";
+        obstaculo.style.top=x;
+        obstaculo.style.left=y;
+    }
+    //Funcion que lee tecla pulsada de direccion
+    function LeerTecla(teclapresionada) {
+        if (teclapresionada.keyCode==LEFT||teclapresionada.keyCode==UP||
+            teclapresionada.keyCode==RIGHT||teclapresionada.keyCode==DOWN){
+            direccion=teclapresionada.keyCode;
+            console.log(arrancado);
+            if(!arrancado) {
+                console.log("timer");
+                intervalo=setInterval(() => { 
+                Mover();
+                console.log("comprobar choque");
+                ComprobarChoque();
+                },5);
+                arrancado=true;
+                tiempo1=new Date();
+            }
+        }
+    }
+    function ComprobarChoque() {
+        console.log("esttyo aqui");
+        for (let index = 0; index < numeroObstaculos; index++) {
+            const posX=parseInt(arrayX[index]);
+            const posY=parseInt(arrayY[index]);
+          
+            if(bola.offsetLeft>(posX-30) &&
+                bola.offsetLeft<(posX+10)&&
+                bola.offsetTop>(posY-30) &&
+                bola.offsetTop<(posY+10)){
+                   
+                    return true;
+            }
+        } 
+        return false;
+    }
+    function Mover() {
+        
+        if (bola.offsetLeft > window.innerWidth - 49 ||
+            bola.offsetLeft < 9 ||
+            bola.offsetTop > window.innerHeight - 49 ||
+            bola.offsetTop < 9 ||ComprobarChoque()) {
+            clearInterval(intervalo);
+            Final();
+        }else {
+            switch (direccion) {
+                case LEFT:
+                    bola.style.left = bola.offsetLeft - 1 + "px";
+                    break;
+                case UP:
+                    bola.style.top = bola.offsetTop - 1 + "px";
+                    break;
+                case RIGHT:
+                    bola.style.left = bola.offsetLeft + 1 + "px";
+                    break;
+                case DOWN:
+                    bola.style.top = bola.offsetTop + 1 + "px";
+                    break;
+                default:
+                    console.log("Default");
+                    break;
+            }
+        }
+    }
+    //Funcion alerta tiempo transurrido de partida
+    function Final() {
+        let tiempo2 = new Date();
+        let texto= document.createElement("p");
+        let segundos=Math.round((tiempo2.getTime() - tiempo1.getTime())/ 1000)
+        
+        
+        texto.innerHTML="La partida ha durado "+segundos+" segundos";
+        texto.style.fontSize="33px";
+        texto.style.fontWeight="bold";
+        texto.style.textAlign="center";
+        
+        document.getElementById("divfondo").appendChild(texto);
+    }
+
+</script>
+<body>
+</body>
+</html>

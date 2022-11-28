@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    this.onload=()=>{
+        hoy();
+        document.getElementById("tiempo").innerHTML="Hoy es "+numeromes+" ," + dia+" de "+ numeromes+" de " +ano+" y son las " +horas+":"+minutos+":"+segundos;
+        document.getElementById("Tiempo").addEventListener("click", () => {
+        });
+    }
+    function hoy() {
+        let hoy = new Date();
+        dia=hoy.getDate();
+        numerosemana=hoy.getDay();
+        switch (numerosemana) {
+            case 0:
+                numerosemana="Domingo"
+                break;
+            case 1:
+                numerosemana="Lunes"
+                break;
+            case 2:
+                numerosemana="Martes"
+                break;
+            case 3:
+                numerosemana="Miercoles"
+                break;
+            case 4:
+                numerosemana="Jueves"
+                break;
+            case 5:
+                numerosemana="Viernes"
+                break;
+            case 6:
+                numerosemana="Sabado"
+                break;
+            default:
+                break;
+        }
+        switch (numeromes) {
+            case 0:
+                numeromes="Enero"
+                break;
+            case 1:
+                numeromes="Febrero"
+                break;
+            case 2:
+                numeromes="Marzo"
+                break;
+            case 3:
+                numeromes="Abril"
+                break;
+            case 4:
+                numeromes="Mayo"
+                break;
+            case 5:
+                numeromes="Junio"
+                break;
+            case 6:
+                numeromes="Julio"
+                break;
+            case 7:
+                numeromes="Agosto"
+                break;
+            case 8:
+                numeromes="Septiembre"
+                break;
+            case 9:
+                numeromes="Octubre"
+                break;
+            case 10:
+                numeromes="Noviembre"
+                break;
+            case 11:
+                numeromes="Diciembre"
+                break;
+            default:
+                break;
+        }
+        mes=hoy.getMonth();
+        ano=hoy.getFullYear();
+        horas =hoy.getHours();
+        minutos=hoy.getMinutes();
+        segundos=hoy.getSeconds();
+        ano=hoy.getFullYear();
+        
+        return;
+    }
+</script>
+<body>
+    <button id="Tiempo">
+        Parar tiempo
+    </button>
+
+    <p id="tiempo">fecha de hoy</p>
+</body>
+</html>

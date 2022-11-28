@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    let cont=0;
+    let variable1=1;
+    let variable2="1";
+
+
+    function acierto(pregunta,imagen,botones,contador) {
+        document.getElementById(pregunta).style.color="green";
+        document.getElementById(imagen).src= "./imagenes/CHECK.jpg" ;
+        cont++
+        console.log(typeof(cont));
+        console.log(cont instanceof Number);
+        document.getElementById(contador).innerHTML=cont;
+        document.getElementById(imagen).style.width="50px";
+        document.getElementById(imagen).style.height="50px";
+        // document.getElementsByClassName(botones)[0].style='visibility:hidden'; 
+        // document.getElementsByClassName(botones)[1].style='visibility:hidden'; 
+        for (let i = 0; i < 2; i++) {
+            document.getElementsByClassName(botones)[i].style='visibility:hidden';     
+        }
+        
+    }   
+    function fallo(pregunta,imagen,botones) {
+        document.getElementById(pregunta).style.color="red";
+        document.getElementById(imagen).src="./imagenes/FALLO.webp";
+        document.getElementById(imagen).style.width="50px"; 
+        document.getElementById(imagen).style.height="50px";
+        // document.getElementsByClassName(botones)[0].style='visibility:hidden'; 
+        // document.getElementsByClassName(botones)[1].style='visibility:hidden'; 
+        for (let i = 0; i < 2; i++) {
+            document.getElementsByClassName(botones)[i].style='visibility:hidden';   
+        }
+    }
+</script>
+
+<body>
+    <h2 id="1">  Estudias Desarrollo de aplicaciones web?<img id="imagen1" src="./imagenes/INTERROGACION.jpg" alt="INTERROGACION" style="height:50px; width:50px"; ></h2>
+    <button Class="botones1" onclick="acierto('1','imagen1','botones1','contador')">verdadero</button>
+    <button Class="botones1" onclick="fallo('1','imagen1','botones1')">falso</button>
+
+    <h2 id="2"> Estudias Desarrollo de aplicaciones Multiplataforma? <img id="imagen2" src="./imagenes/INTERROGACION.jpg" alt="INTERROGACION" style="height:50px; width:50px";></h2>
+    <button Class="botones2" onclick="fallo('2','imagen2','botones2')">verdadero</button>
+    <button Class="botones2" onclick="acierto('2','imagen2','botones2','contador')">falso</button>
+
+    <h2 id="3">  Estudias Desarrollo de aplicaciones web?<img id="imagen3" src="./imagenes/INTERROGACION.jpg" alt="INTERROGACION" style="height:50px; width:50px";></h2>
+    <button Class="botones3" onclick="acierto('3','imagen3','botones3','contador')">verdadero</button>
+    <button Class="botones3" onclick="fallo('3','imagen3','botones3')">falso</button>
+
+    <h2 id="4"> Tienes menos de 15 años? <img id="imagen4" src="./imagenes/INTERROGACION.jpg" alt="INTERROGACION" style="height:50px; width:50px";></h2>
+    <button Class="botones4" onclick="fallo('4','imagen4','botones4')">verdadero</button>
+    <button Class="botones4" onclick="acierto('4','imagen4','botones4','contador')">falso</button>
+
+    <h2 id="5">  Estudias Desarrollo de aplicaciones web?<img id="imagen5" src="./imagenes/INTERROGACION.jpg" alt="INTERROGACION" style="height:50px; width:50px";></h2>
+    <button Class="botones5" onclick="acierto('5','imagen5','botones5','contador')">verdadero</button>
+    <button Class="botones5" onclick="fallo('5','imagen5','botones5')">falso</button>
+
+    <h2 id="6"> Estudias Desarrollo de aplicaciones Multiplataforma? <img id="imagen6" src="./imagenes/INTERROGACION.jpg" alt="INTERROGACION" style="height:50px; width:50px";></h2>
+    <button Class="botones6" onclick="fallo('6','imagen6','botones6')">verdadero</button>
+    <button Class="botones6" onclick="acierto('6','imagen6','botones6','contador')">falso</button>
+
+    <h2 id="7">  Estudias Desarrollo de aplicaciones web?<img id="imagen7" src="./imagenes/INTERROGACION.jpg" alt="INTERROGACION" style="height:50px; width:50px";></h2>
+    <button Class="botones7" onclick="acierto('7','imagen7','botones7','contador')">verdadero</button>
+    <button Class="botones7" onclick="fallo('7','imagen7','botones7')">falso</button>
+
+    <h2 id="8"> Tienes menos de 15 años? <img id="imagen8" src="./imagenes/INTERROGACION.jpg" alt="INTERROGACION" style="height:50px; width:50px";></h2>
+    <button Class="botones8" onclick="fallo('8','imagen8','botones8')">verdadero</button>
+    <button Class="botones8" onclick="acierto('8','imagen8','botones8','contador')">falso</button>
+
+    <h2 id="9">  Estudias Desarrollo de aplicaciones web?<img id="imagen9" src="./imagenes/INTERROGACION.jpg" alt="INTERROGACION" style="height:50px; width:50px";></h2>
+    <button Class="botones9" onclick="acierto('9','imagen9','botones9','contador')">verdadero</button>
+    <button Class="botones9" onclick="fallo('9','imagen9','botones9')">falso</button>
+
+    <h2 id="10"> Tienes menos de 15 años? <img id="imagen10" src="./imagenes/INTERROGACION.jpg" alt="INTERROGACION" style="height:50px; width:50px";></h2>
+    <button Class="botones10" onclick="fallo('10','imagen10','botones10')">verdadero</button>
+    <button Class="botones10" onclick="acierto('10','imagen10','botones10','contador')">falso</button>
+
+    <div>
+        <h2>Contador de aciertos</h2>
+        <h3 id="contador">Contador de aciertos</h3>
+    </div>
+
+</body>
+</html>

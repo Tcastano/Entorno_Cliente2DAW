@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+    <script>
+        this.onload =()=> {           
+            function CambiarTexto() {
+                document.getElementById("Parrafo").innerHTML="Adios Mundo"; 
+            }
+            document.getElementById("boton").addEventListener("click",()=>{
+                CambiarTexto();
+            });
+        }
+    </script>
+<body>
+    <p id="Parrafo">
+        Hola mundo
+    </p>
+    <button id="boton">
+        boton
+    </button>
+    
+</body>
+</html>
